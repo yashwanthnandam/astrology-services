@@ -5,7 +5,6 @@ Astrology Services is a Go-based application that provides various astrology-rel
 ## Table of Contents
 
 - [Features](#features)
-- [Project Structure](#project-structure)
 - [Setup](#setup)
 - [Usage](#usage)
 - [Endpoints](#endpoints)
@@ -21,60 +20,6 @@ Astrology Services is a Go-based application that provides various astrology-rel
 - Remedies (Rudraksha suggestions, gemstone recommendations)
 - Dosha analysis (Mangalik, Kalsarpa, Sadesati)
 - Kundali matching
-
-## Project Structure
-
-astrology-services/
-├── cmd/
-│ └── main.go
-├── config/
-│ └── config.go
-├── internal/
-│ ├── domain/
-│ │ ├── models/
-│ │ │ ├── kundali.go
-│ │ │ ├── ashtakvarga.go
-│ │ │ ├── dasha.go
-│ │ │ ├── report.go
-│ │ │ ├── remedy.go
-│ │ │ ├── dosha.go
-│ │ │ └── match.go
-│ │ └── repositories/
-│ │ └── repository.go
-│ ├── usecase/
-│ │ ├── kundali_usecase.go
-│ │ ├── ashtakvarga_usecase.go
-│ │ ├── dasha_usecase.go
-│ │ ├── report_usecase.go
-│ │ ├── remedy_usecase.go
-│ │ ├── dosha_usecase.go
-│ │ └── match_usecase.go
-│ ├── delivery/
-│ │ ├── http/
-│ │ │ ├── handler.go
-│ │ │ ├── kundali_handler.go
-│ │ │ ├── ashtakvarga_handler.go
-│ │ │ ├── dasha_handler.go
-│ │ │ ├── report_handler.go
-│ │ │ ├── remedy_handler.go
-│ │ │ ├── dosha_handler.go
-│ │ │ └── match_handler.go
-│ ├── repository/
-│ │ ├── mysql/
-│ │ │ ├── mysql_kundali_repository.go
-│ │ │ ├── mysql_ashtakvarga_repository.go
-│ │ │ ├── mysql_dasha_repository.go
-│ │ │ ├── mysql_report_repository.go
-│ │ │ ├── mysql_remedy_repository.go
-│ │ │ ├── mysql_dosha_repository.go
-│ │ │ └── mysql_match_repository.go
-│ └── di/
-│ └── di.go
-├── pkg/
-│ └── gpt/
-│ └── gpt_service.go
-├── .env
-└── go.mod
 
 
 ## Setup
@@ -99,13 +44,11 @@ astrology-services/
     SERVER_ADDRESS=":8080"
     GPT_API_KEY="your_openai_api_key"
    ```
-3. 
-Install dependencies:
+3. Install dependencies:
 ```
 go mod tidy
 ```
-4. 
-Run the application:
+4. Run the application:
 ```
 go run cmd/main.go
 ```
