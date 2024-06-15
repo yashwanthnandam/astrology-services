@@ -1,5 +1,4 @@
-![Alt text](https://file%252B.vscode-resource.vscode-cdn.net/Users/yashwanth/Documents/projects/astrology-services/WhatsApp%2520Image%25202024-06-15%2520at%252012.05.02.jpeg?version%253D1718462532391)
-
+![Alt text](<WhatsApp Image 2024-06-15 at 12.05.02.jpeg>)
 # Astrology Services
 
 Astrology Services is a Go-based application that provides various astrology-related services, including Kundali generation, Ashtakvarga chart service, Dasha predictions, free astrology reports, remedies, dosha analysis, and Kundali matching.
