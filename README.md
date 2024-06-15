@@ -59,30 +59,39 @@ The application provides a REST API to interact with various astrology services.
 
 Endpoints
 Kundali Generation
-
+```
 GET /kundali/:id
+```
+
 Ashtakvarga Chart Service
-
+```
 GET /ashtakvarga/:id
+```
+
 Dasha Predictions
-
+```
 GET /dasha/:id
+```
 Free Astrology Reports
-
+```
 GET /report/general/:id
 GET /report/planetary/:id
 GET /report/vimshottari/:id
 GET /report/yoga/:id
+```
 Remedies
-
+```
 GET /remedy/rudraksha/:id
 GET /remedy/gemstone/:id
+```
 Dosha Analysis
-
+```
 GET /dosha/:id
+```
 Kundali Matching
-
+```
 GET /match/:id
+```
 
 
 Contributing - 
