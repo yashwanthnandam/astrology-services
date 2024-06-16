@@ -121,6 +121,7 @@ You will be of a hard-working personality, and this would help you in attaining 
 }
 
 func (pr *PlanetaryReport) generateReport() *models.PlanetaryReport {
+
 	return &models.PlanetaryReport{
 		SunConsideration:     pr.sunConsideration(),
 		MoonConsideration:    pr.moonConsideration(),
@@ -132,24 +133,4 @@ func (pr *PlanetaryReport) generateReport() *models.PlanetaryReport {
 		RahuConsideration:    pr.rahuConsideration(),
 		KetuConsideration:    pr.ketuConsideration(),
 	}
-}
-
-func (s *AstrologyReportService) GeneratePlanetaryReport(name, dob, tob, placeOfBirth string) (*models.PlanetaryReport, error) {
-	dobTime, err := time.Parse("2006-01-02", dob)
-	if err != nil {
-		return nil, err
-	}
-	tobTime, err := time.Parse("15:04", tob)
-	if err != nil {
-		return nil, err
-	}
-
-	report := &PlanetaryReport{
-		name: name,
-		dob:  dobTime,
-		tob:  tobTime,
-		pob:  placeOfBirth,
-	}
-
-	return report.generateReport(), nil
 }

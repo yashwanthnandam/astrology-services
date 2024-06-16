@@ -2,7 +2,6 @@ package usecase
 
 import (
 	"astrology-services/internal/domain/models"
-	"astrology-services/internal/services"
 )
 
 type ReportRepository interface {
@@ -11,13 +10,18 @@ type ReportRepository interface {
 	GetVimshottariReportByID(id uint) (*models.VimshottariReport, error)
 	GetYogaReportByID(id uint) (*models.YogaReport, error)
 }
+type ReportService interface {
+	GeneratePlanetaryReport(name, dob, tob, placeOfBirth string) (*models.PlanetaryReport, error)
+	GenerateVimshottariReport(name, dob, tob, placeOfBirth string) (*models.VimshottariReport, error)
+	GenerateYogaReport(name, dob, tob, placeOfBirth string) (*models.YogaReport, error)
+}
 
 type ReportUsecase struct {
 	repository    ReportRepository
-	reportService services.ReportService
+	reportService ReportService
 }
 
-func NewReportUsecase(r ReportRepository, s services.ReportService) *ReportUsecase {
+func NewReportUsecase(r ReportRepository, s ReportService) *ReportUsecase {
 	return &ReportUsecase{repository: r, reportService: s}
 }
 

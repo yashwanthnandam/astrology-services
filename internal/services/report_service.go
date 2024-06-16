@@ -5,15 +5,9 @@ import (
 	"time"
 )
 
-type ReportService interface {
-	GeneratePlanetaryReport(name, dob, tob, placeOfBirth string) (*models.PlanetaryReport, error)
-	GenerateVimshottariReport(name, dob, tob, placeOfBirth string) (*models.VimshottariReport, error)
-	GenerateYogaReport(name, dob, tob, placeOfBirth string) (*models.YogaReport, error)
-}
-
 type AstrologyReportService struct{}
 
-func NewAstrologyReportService() ReportService {
+func NewAstrologyReportService() *AstrologyReportService {
 	return &AstrologyReportService{}
 }
 func (s *AstrologyReportService) GeneratePlanetaryReport(name, dob, tob, placeOfBirth string) (*models.PlanetaryReport, error) {
