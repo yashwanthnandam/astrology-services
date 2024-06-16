@@ -15,9 +15,9 @@ type ReportHandler struct {
 func NewReportHandler(r *gin.Engine, u usecase.ReportUsecase) {
 	handler := &ReportHandler{u}
 	r.GET("/report/general/:id", handler.GetGeneralReport)
-	r.GET("/report/planetary/:id", handler.GetPlanetaryReport)
-	r.GET("/report/vimshottari/:id", handler.GetVimshottariReport)
-	r.GET("/report/yoga/:id", handler.GetYogaReport)
+	r.GET("/report/planetary", handler.GetPlanetaryReport)
+	r.GET("/report/vimshottari", handler.GetVimshottariReport)
+	r.GET("/report/yoga", handler.GetYogaReport)
 }
 
 func (h *ReportHandler) GetGeneralReport(c *gin.Context) {
@@ -37,13 +37,17 @@ func (h *ReportHandler) GetGeneralReport(c *gin.Context) {
 }
 
 func (h *ReportHandler) GetPlanetaryReport(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+	name := c.Query("name")
+	dob := c.Query("dob")
+	tob := c.Query("tob")
+	placeOfBirth := c.Query("place_of_birth")
+
+	if name == "" || dob == "" || tob == "" || placeOfBirth == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Missing parameters"})
 		return
 	}
 
-	report, err := h.usecase.GetPlanetaryReport(uint(id))
+	report, err := h.usecase.GeneratePlanetaryReport(name, dob, tob, placeOfBirth)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -53,13 +57,17 @@ func (h *ReportHandler) GetPlanetaryReport(c *gin.Context) {
 }
 
 func (h *ReportHandler) GetVimshottariReport(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+	name := c.Query("name")
+	dob := c.Query("dob")
+	tob := c.Query("tob")
+	placeOfBirth := c.Query("place_of_birth")
+
+	if name == "" || dob == "" || tob == "" || placeOfBirth == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Missing parameters"})
 		return
 	}
 
-	report, err := h.usecase.GetVimshottariReport(uint(id))
+	report, err := h.usecase.GenerateVimshottariReport(name, dob, tob, placeOfBirth)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -69,13 +77,17 @@ func (h *ReportHandler) GetVimshottariReport(c *gin.Context) {
 }
 
 func (h *ReportHandler) GetYogaReport(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+	name := c.Query("name")
+	dob := c.Query("dob")
+	tob := c.Query("tob")
+	placeOfBirth := c.Query("place_of_birth")
+
+	if name == "" || dob == "" || tob == "" || placeOfBirth == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Missing parameters"})
 		return
 	}
 
-	report, err := h.usecase.GetYogaReport(uint(id))
+	report, err := h.usecase.GenerateYogaReport(name, dob, tob, placeOfBirth)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

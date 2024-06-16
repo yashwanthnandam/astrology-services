@@ -3,6 +3,7 @@ package di
 import (
 	"astrology-services/config"
 	mysqlRepository "astrology-services/internal/repository/mysql"
+	"astrology-services/internal/services"
 	"astrology-services/internal/usecase"
 	"astrology-services/pkg/gpt"
 	"log"
@@ -28,7 +29,6 @@ func NewContainer(cfg *config.Config) *Container {
 		log.Fatalf("failed to connect to database: %v", err)
 	}
 
-	// Initialize repositories
 	kundaliRepo := mysqlRepository.NewKundaliRepository(db)
 	ashtakvargaRepo := mysqlRepository.NewAshtakvargaRepository(db)
 	dashaRepo := mysqlRepository.NewDashaRepository(db)
@@ -37,16 +37,15 @@ func NewContainer(cfg *config.Config) *Container {
 	doshaRepo := mysqlRepository.NewDoshaRepository(db)
 	matchRepo := mysqlRepository.NewMatchRepository(db)
 
-	// Initialize usecases
 	kundaliUsecase := usecase.NewKundaliUsecase(kundaliRepo)
 	ashtakvargaUsecase := usecase.NewAshtakvargaUsecase(ashtakvargaRepo)
 	dashaUsecase := usecase.NewDashaUsecase(dashaRepo)
-	reportUsecase := usecase.NewReportUsecase(reportRepo)
+	reportService := services.NewAstrologyReportService()
+	reportUsecase := usecase.NewReportUsecase(reportRepo, reportService)
 	remedyUsecase := usecase.NewRemedyUsecase(remedyRepo)
 	doshaUsecase := usecase.NewDoshaUsecase(doshaRepo)
 	matchUsecase := usecase.NewMatchUsecase(matchRepo)
 
-	// Initialize GPT service
 	gptService := gpt.NewGPTService(cfg.GPTAPIKey)
 
 	return &Container{

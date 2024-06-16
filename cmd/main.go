@@ -11,7 +11,6 @@ import (
 
 func main() {
 	cfg := config.LoadConfig()
-
 	container := di.NewContainer(cfg)
 	router := gin.Default()
 

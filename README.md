@@ -53,6 +53,28 @@ go mod tidy
 ```
 go run cmd/main.go
 ```
+5. Use below launch.json configuration in vs code to start debugging
+
+```
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Package",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/main.go",
+            "env": {
+                "DATABASE_URL": "root:password@tcp(127.0.0.1:3306)/mysql?charset=utf8mb4&parseTime=True&loc=Local",
+                "SERVER_ADDRESS": ":8080",
+                "GPT_API_KEY": "your_openai_api_key"
+            }
+        }
+    ]
+}
+
+```
 
 Usage
 The application provides a REST API to interact with various astrology services. Use tools like curl or Postman to test the endpoints.

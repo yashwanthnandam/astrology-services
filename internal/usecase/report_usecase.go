@@ -1,6 +1,9 @@
 package usecase
 
-import "astrology-services/internal/domain/models"
+import (
+	"astrology-services/internal/domain/models"
+	"astrology-services/internal/services"
+)
 
 type ReportRepository interface {
 	GetGeneralReportByID(id uint) (*models.GeneralReport, error)
@@ -10,25 +13,26 @@ type ReportRepository interface {
 }
 
 type ReportUsecase struct {
-	repository ReportRepository
+	repository    ReportRepository
+	reportService services.ReportService
 }
 
-func NewReportUsecase(r ReportRepository) *ReportUsecase {
-	return &ReportUsecase{r}
+func NewReportUsecase(r ReportRepository, s services.ReportService) *ReportUsecase {
+	return &ReportUsecase{repository: r, reportService: s}
 }
 
 func (u *ReportUsecase) GetGeneralReport(id uint) (*models.GeneralReport, error) {
 	return u.repository.GetGeneralReportByID(id)
 }
 
-func (u *ReportUsecase) GetPlanetaryReport(id uint) (*models.PlanetaryReport, error) {
-	return u.repository.GetPlanetaryReportByID(id)
+func (u *ReportUsecase) GeneratePlanetaryReport(name, dob, tob, placeOfBirth string) (*models.PlanetaryReport, error) {
+	return u.reportService.GeneratePlanetaryReport(name, dob, tob, placeOfBirth)
 }
 
-func (u *ReportUsecase) GetVimshottariReport(id uint) (*models.VimshottariReport, error) {
-	return u.repository.GetVimshottariReportByID(id)
+func (u *ReportUsecase) GenerateVimshottariReport(name, dob, tob, placeOfBirth string) (*models.VimshottariReport, error) {
+	return u.reportService.GenerateVimshottariReport(name, dob, tob, placeOfBirth)
 }
 
-func (u *ReportUsecase) GetYogaReport(id uint) (*models.YogaReport, error) {
-	return u.repository.GetYogaReportByID(id)
+func (u *ReportUsecase) GenerateYogaReport(name, dob, tob, placeOfBirth string) (*models.YogaReport, error) {
+	return u.reportService.GenerateYogaReport(name, dob, tob, placeOfBirth)
 }
